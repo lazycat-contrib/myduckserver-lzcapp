@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDuck Server 使用说明</title>
+    <style>
+        :root {
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --header-footer-background: #007aff;
+            --section-background: white;
+            --code-background: #f0f0f0;
+            --dark-background-color: #333;
+            --dark-text-color: #f5f5f5;
+            --dark-section-background: #444;
+            --dark-code-background: #777;
+            --toggle-background: #007aff;
+            --toggle-background-dark: #555;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background: var(--header-footer-background);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: var(--header-footer-background);
+            margin-top: 20px;
+        }
+        section {
+            padding: 20px;
+            margin: 10px;
+            background: var(--section-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        code {
+            background: var(--code-background);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background: var(--code-background);
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--header-footer-background);
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-checkbox {
+            display: none;
+        }
+        .toggle-label {
+            width: 50px;
+            height: 25px;
+            background: var(--toggle-background);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-label::after {
+            content: '';
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background: var(--toggle-background-dark);
+        }
+        .toggle-checkbox:checked + .toggle-label::after {
+            transform: translateX(25px);
+        }
+        .dark-theme {
+            --background-color: var(--dark-background-color);
+            --text-color: var(--dark-text-color);
+            --section-background: var(--dark-section-background);
+            --code-background: var(--dark-code-background);
+        }
+    </style>
+    <script>
+        function getHost() {
+            const host = window.location.hostname;
+            document.getElementById('mysql-command').textContent = `mysql -h ${host} -P3306 -uroot`;
+            document.getElementById('postgresql-command').textContent = `psql -h ${host} -p 5432 -U postgres`;
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const checkbox = document.getElementById('theme-checkbox');
+            checkbox.checked = !checkbox.checked; // 切换复选框状态
+        }
+
+        window.onload = getHost; // 页面加载时调用 getHost 函数
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>MyDuck Server 使用说明</h1>
+    <label class="theme-toggle">
+        <input type="checkbox" id="theme-checkbox" class="toggle-checkbox" onclick="toggleTheme()">
+        <span class="toggle-label"></span>
+    </label>
+</header>
+
+<section>
+    <h2>简介</h2>
+    <p>MyDuck Server 是一个基于DuckDB的数据库服务，它可以通过 MySQL 和 Postgres 协议连接，并提供高性能的OLAP查询。</p>
+</section>
+
+<section>
+    <h2>使用</h2>
+    <h3>通过 MySQL 客户端连接</h3>
+    <pre><code id="mysql-command">mysql -h实际请求的host -P3306 -uroot</code></pre>
+
+    <h3>通过 PostgreSQL 客户端连接</h3>
+    <pre><code id="postgresql-command">psql -h 实际请求的host -p 5432 -U postgres</code></pre>
+</section>
+
+<section>
+    <h2>关键特性</h2>
+    <ul>
+        <li>快速的 OLAP 查询</li>
+        <li>MySQL 和 PostgreSQL 兼容接口</li>
+        <li>零 ETL 数据复制</li>
+        <li>支持 HTAP 架构</li>
+    </ul>
+</section>
+
+<footer>
+    <p>© 2025 <a href="https://github.com/apecloud/myduckserver">MyDuck Server</a>. 保留所有权利。Powered By <a href="https://lazycat.cloud">Lazycat Server</a></p>
+</footer>
+
+</body>
+</html>

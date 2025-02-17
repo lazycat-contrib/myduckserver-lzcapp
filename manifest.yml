@@ -1,0 +1,36 @@
+lzc-sdk-version: "0.1"
+name: MyDuck Server
+package: cloud.lazycat.app.myduck-server
+version: 0.0.1
+description: 基于DuckDB的Mysql、PostgreSQL数据库服务
+homepage: https://github.com/apecloud/myduckserver
+author: apecloud
+application:
+  subdomain: myduck-server
+  background_task: true
+  multi_instance: false
+  gpu_accel: false
+  kvm_accel: false
+  usb_accel: false
+  routes:
+    - /=file:///lzcapp/pkg/content/usage.html
+  ingress:
+    - protocol: tcp
+      port: 3306
+      service: myduckserver
+    - protocol: tcp
+      port: 5432
+      service: myduckserver
+services:
+  myduckserver:
+    image: registry.lazycat.cloud/czyt/apecloud/myduckserver:417604972ee485b4
+    binds:
+      - /lzcapp/var/data:/home/admin/data
+    setup_script: |     
+      if [ -z "$(find /home/admin/data/myduck.db -mindepth 1 -maxdepth 1)" ]; then
+          cp  /lzcapp/pkg/content/myduck.db  /home/admin/data/
+      fi
+unsupported_platforms:
+  - ios
+  - android
+  - tvos
