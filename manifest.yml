@@ -1,7 +1,7 @@
 lzc-sdk-version: "0.1"
 name: MyDuck Server
 package: cloud.lazycat.app.myduck-server
-version: 0.0.1
+version: 0.0.2
 description: 基于DuckDB的Mysql、PostgreSQL数据库服务
 homepage: https://github.com/apecloud/myduckserver
 author: apecloud
@@ -28,6 +28,7 @@ services:
       - /lzcapp/var/data:/home/admin/data
     setup_script: |     
       if [ -z "$(find /home/admin/data/myduck.db -mindepth 1 -maxdepth 1)" ]; then
+          echo "myduck.db not found, copying from pkg to user directory"
           cp  /lzcapp/pkg/content/myduck.db  /home/admin/data/
       fi
 unsupported_platforms:
