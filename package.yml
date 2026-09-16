@@ -1,0 +1,18 @@
+package: cloud.lazycat.app.myduck-server
+version: 0.0.2
+name: MyDuck Server
+description: "基于DuckDB的Mysql、PostgreSQL数据库服务"
+min_os_version: "1.5.0"
+homepage: https://github.com/apecloud/myduckserver
+author: apecloud
+unsupported_platforms:
+  - ios
+  - android
+  - tvos
+locales:
+  zh:
+    name: MyDuck Server
+    description: "基于DuckDB的MySQL、PostgreSQL数据库服务，轻量易用"
+  en:
+    name: MyDuck Server
+    description: "MySQL/PostgreSQL-compatible database service built on DuckDB"
