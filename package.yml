@@ -1,5 +1,5 @@
 package: cloud.lazycat.app.myduck-server
-version: 0.0.2
+version: 0.3.0
 name: MyDuck Server
 description: "基于DuckDB的Mysql、PostgreSQL数据库服务"
 min_os_version: "1.5.0"

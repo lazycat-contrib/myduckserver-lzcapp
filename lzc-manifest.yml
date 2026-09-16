@@ -12,11 +12,10 @@ application:
     - protocol: tcp
       port: 5432
       service: myduckserver
-
 services:
   myduckserver:
     # upstream: apecloud/myduckserver:v0.3.0
-    image: apecloud/myduckserver:v0.3.0
+    image: registry.lazycat.cloud/czyt/apecloud/myduckserver:d16184bc095dc75d
     binds:
       - /lzcapp/var/data:/home/admin/data
     setup_script: |
