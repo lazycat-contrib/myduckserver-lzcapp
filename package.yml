@@ -1,4 +1,5 @@
 package: cloud.lazycat.app.myduck-server
+license: Apache-2.0
 version: 0.3.0
 name: MyDuck Server
 description: "基于DuckDB的Mysql、PostgreSQL数据库服务"
